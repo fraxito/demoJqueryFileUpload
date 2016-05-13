@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>EJEMPLO jQUERY FILE UPLOAD</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/jquery.fileupload.css">
+        <style>
+            .upload-drop-zone{
+                height: 100px;
+                border-width: 2px;
+                margin-bottom: 20px;
+                color: #ccc;
+                border-style: dashed;
+                border-color: #ccc;
+                line-height: 100px;
+                text-align: center;
+            }
+            .upload-drop-zone.drop{
+                color: #222;
+                border-color: #222;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2> Selecciona un fichero. Puedes arrastrarlo y soltarlo aquí</h2>
+                <br>
+                <!-- botón para cargar archivos -->
+                <button class="btn btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    Elige Archivo...
+                    <input id="fileupload" type="file" name="files[]" multiple>
+                </button>
+                <hr/>
+                <br>
+                <div class="upload-drop-zone" id="drop-zone">
+                    o arrastra y suéltalo aquí
+                </div>
+                <br>
+                <!-- barra de progreso de la carga -->
+                <div id="progress" class="progress">
+                    <div class="progress-bar progress-striped"></div>
+                </div>
+                <!-- divs para informar de la subida -->
+                <div id="files" ></div>
+                <div id="upload"></div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+         
+        <script src="js/jquery-2.2.3.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.fileupload.js"></script>
+        <script>
+            $(function(){
+            var url = 'server/ficheros';
+            
+            $('#fileupload').fileupload({
+                url: url,
+                dataType: 'json',
+                progressall: function(e, data){
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progress .progress-bar').css('width', progress + '%'); 
+                }
+            }).prop('disabled', !$.support.fileInput)
+                    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+            });
+        </script>
+    </body>
+   
+</html>
