@@ -57,10 +57,11 @@
          
         <script src="js/jquery-2.2.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery.fileupload.js"></script>
         <script>
             $(function(){
-            var url = 'server/ficheros';
+            var url = 'server/ficheros/';
             
             $('#fileupload').fileupload({
                 url: url,
@@ -70,7 +71,7 @@
                     $('#progress .progress-bar').css('width', progress + '%'); 
                 }
             }).prop('disabled', !$.support.fileInput)
-                    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+              .parent().addClass($.support.fileInput ? undefined : 'disabled');
             });
         </script>
     </body>
